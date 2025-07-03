@@ -1,2 +1,4 @@
 #preventing it to commit in github
 node_modules/
+
+.env
