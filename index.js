@@ -2,11 +2,14 @@
 const express = require("express");
 const morgan = require("morgan");
 require("dotenv").config();
-const userRoute = require("./Routes/route");
+const userRoute = require("./Routes/userRoute");
+
 const connectDb = require("./config/database");
 const colors = require("colors");
+
 //using that databasefile
 connectDb();
+
 //rest objects
 const app = express();
 
@@ -14,15 +17,13 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 //route
-app.get("/test", (req, res) => {
-  res.status(200).send("<h1>hello cooder from khadka server</h1>");
-});
-//l
-app.use("/user", userRoute);
+//for register route
+app.use("/api/v1/user", userRoute.router);
+
 //port
 const port = process.env.PORT || 8000;
 
 //listen
 app.listen(port, () => {
-  console.log(`server is running ${port}`.bgYellow.bold);
+  console.log(`server is running ${port}`.bgGreen.red.bold);
 });
